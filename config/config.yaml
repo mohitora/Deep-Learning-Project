@@ -1,0 +1,9 @@
+dataset_path: "/path/to/dataset"
+batch_size: 32
+epochs: 20
+learning_rate: 0.001
+image_size: 224
+embedding_dim: 256
+vocab_size: 5000
+max_caption_length: 50
+
