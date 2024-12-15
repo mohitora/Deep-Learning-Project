@@ -1,4 +1,3 @@
-
 # Image Captioning using CNN
 
 This repository contains an implementation of an image captioning model that combines a Convolutional Neural Network (CNN) with a Recurrent Neural Network (RNN) to generate captions for images. The CNN (InceptionV3) is used for feature extraction, and the RNN processes the extracted features to generate text captions.
