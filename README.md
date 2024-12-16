@@ -1,86 +1,63 @@
-# Image Captioning using CNN
+# Image Captioning with Deep Learning
 
-This project demonstrates how to use a Convolutional Neural Network (CNN) combined with a Recurrent Neural Network (RNN) for generating captions for images. The CNN model extracts features from images, while the RNN (specifically an LSTM) is used to generate captions based on the image features.
+This project implements an image captioning model using a combination of Convolutional Neural Networks (CNNs) and Recurrent Neural Networks (RNNs). The 1  model takes an image as input and generates a textual description (caption) of its content
 
-The project uses TensorFlow and Keras for building the model, and the configuration is managed through a YAML file.
+## Dependencies
+This project requires the following Python libraries:
 
-## Requirements
+- tensorflow
+- numpy
+- pandas
+- nltk
 
-The following libraries are required to run the project:
+## Usage
+### 1. Prepare Data:
 
-- TensorFlow (version 2.8.0)
-- Keras (version 2.8.0)
-- PyYAML
-- NumPy
-- Matplotlib
-- Pillow
+Create a CSV file named image_captions.csv with two columns:
 
-You can install all dependencies by running:
+image_path: Path to the image file (relative or absolute)
+caption: Textual description of the image
+Place your images in a dedicated folder (e.g., images).
 
-```bash
-pip install -r requirements.txt
-```
-## Project Structure
-```Image_Captioning/
-│
-├── config/
-│   └── config.yaml            # Configuration file with project parameters
-├── data/
-│   └── <your dataset files>   # Dataset containing images and captions
-├── models/
-│   └── model.py               # CNN-RNN model definition
-├── utils/
-│   └── preprocess.py          # Image preprocessing utilities
-│   └── tokenizer.py           # Tokenizer for captions
-│   └── load_data.py           # Data loading and preparation
-├── main.py                    # Main script to run the model training
-└── requirements.txt           # Required libraries
+Update the image_path column in image_captions.csv to reflect the actual image locations.
+
+### 2. Run the Script:
+
+Open a terminal and navigate to the project directory.
+Run the following command:
+``` bash
+python image_captioning.py
 ```
 
-## Configuration
+### 3. Generate Captions:
 
-The project uses a config.yaml file to store configuration parameters, including:
+The script will train the model based on the provided data.
+After training, the script demonstrates caption generation for a sample image path (specified in config.py).
+You can modify the IMAGE_PATH variable in config.py to generate captions for other images in your dataset.
+Configuration
 
-- dataset_path: The path to the dataset directory containing images and captions.
-- batch_size: The batch size for training.
-- epochs: The number of epochs to train the model.
-- learning_rate: The learning rate for the optimizer.
-- image_size: The target size to which images will be resized.
-- embedding_dim: The dimension of the word embeddings.
-- vocab_size: The vocabulary size for the tokenizer.
-- max_caption_length: The maximum length of captions.
-
-### Example of config.yaml
+The script utilizes a separate configuration file (config.py) to manage key parameters. You can customize the following settings in config.py:
 ```
-dataset_path: "/path/to/dataset"
-batch_size: 32
-epochs: 20
-learning_rate: 0.001
-image_size: 224
-embedding_dim: 256
-vocab_size: 5000
-max_caption_length: 50
+DATA_PATH: Path to the directory containing image_captions.csv.
+IMAGE_CAPTIONS_FILE: Name of the CSV file containing image-caption pairs.
+IMAGE_PATH: Path to the sample image for caption generation (modify this as needed).
+IMAGE_SIZE: Target size for resizing images (e.g., (299, 299))
+BATCH_SIZE: Number of images processed simultaneously during training.
+MAX_LENGTH: Maximum length of captions (controls padding).
+MAX_FEATURES: Maximum number of words considered in the vocabulary.
+EMBEDDING_DIM: Dimensionality of word embeddings.
+EPOCHS: Number of training epochs.
+INCEPTION_V3_WEIGHTS: Weights used for pre-trained InceptionV3 model.
+LSTM_UNITS: Number of units in the LSTM layer.
 ```
-## Dataset
-The dataset should consist of images paired with captions. The dataset should be structured in a way where each image has a corresponding caption. Ensure the images are placed in the ```data/ directory```, and modify the ```load_data.py``` script to handle the dataset properly.
+### 
+4. Additional Notes
 
-## Training the Model
-Once the dataset is ready, you can start training the model by running the main.py script:
-```
-bash
-python main.py
-```
-This will load the dataset, preprocess the images and captions, build the model, and start the training process.
-
-## Model Architecture
-The model architecture consists of two main components:
-
-- CNN for Image Feature Extraction: We use the InceptionV3 model pre-trained on ImageNet for extracting features from the images. These features are passed to the RNN.
-
-- RNN for Caption Generation: The RNN is implemented using an LSTM layer. The LSTM is trained to predict the next word in the sequence based on the features extracted from the image and the previously generated words.
-
-## Testing the Model
-Once the model is trained, you can use it to generate captions for new images by feeding an image into the model and using the decoder to predict the caption.
+This script provides a basic implementation of image captioning.
+You can experiment with different hyperparameters, architectures, and data augmentation techniques to improve performance.
+Consider exploring techniques like beam search for more diverse caption generation.
 
 
-
+### References
+https://github.com/karpathy/neuraltalk2
+https://arxiv.org/abs/1411.4555
